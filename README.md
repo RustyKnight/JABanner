@@ -15,9 +15,9 @@ While there are some really awesome “examples”, none provided a workable sol
 The library has been designed with re-use in mind, with the intention that a single project may use a number of different refresh controls (or sticky headers) on any number of different views.
 
 With this in mind, the library has been designed:
-* No to use inheritance.  This means the library does not extend `UIScrollView`.  This is intentional for a number of reasons.  This prevents the need to have to provide customised versions of classes like `UITableView` and `UICollectionView`, which could seriously compromise the design of other projects
-* No use of `extension`s.  This is personal choice, but it means that there are no “extra” functions exposed on other `UIScrollView` based classes, which might otherwise complicate development or possibly compromise other classes.  It also means that it becomes a deliberate, conscious decision on the part of the developer to make use of the library, which could make it easier to diagnose issues.
-* No using the `UIScrollViewDelegate`, as this could break the implementing class.  Instead, the API makes use KVO and monitors key properties of the `UIScrollView` in order to perform it's operations
+* Not to use inheritance.  This means the library does not extend `UIScrollView`.  This is intentional for a number of reasons.  This prevents the need to have to provide customised versions of classes like `UITableView` and `UICollectionView`, which could seriously compromise the design of other projects
+* Not to use `extension`s.  This is personal choice, but it means that there are no “extra” functions exposed on other `UIScrollView` based classes, which might otherwise complicate development or possibly compromise other classes.  It also means that it becomes a deliberate, conscious decision on the part of the developer to make use of the library, which could make it easier to diagnose issues.
+* Not using the `UIScrollViewDelegate`, as this could break the implementing class.  Instead, the API makes use KVO and monitors key properties of the `UIScrollView` in order to perform it's operations
 
 ## Usage
 
