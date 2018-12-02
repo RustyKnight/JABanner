@@ -25,14 +25,26 @@ public protocol RefreshableController: ExpandableController {
 	func endRefreshing()
 }
 
-public typealias Complition = () -> Void
-
 class Snapshot {
   let insetTop: CGFloat
   
   init(insetTop: CGFloat) {
     self.insetTop = insetTop
   }
+}
+
+class RefreshBeganTrigger {
+	let source: NSObject
+	let selector: Selector
+	
+	init(source: NSObject, selector: Selector) {
+		self.source = source
+		self.selector = selector
+	}
+	
+	func trigger() {
+		source.perform(selector)
+	}
 }
 
 public class BannerController: NSObject {
@@ -69,6 +81,8 @@ public class BannerController: NSObject {
 	weak var scrollView: UIScrollView?
 	
   var animationDuration: TimeInterval = 0.5
+	
+	fileprivate var refreshBegunTriggers: [RefreshBeganTrigger] = []
   
 	public func install(on scrollView: UIScrollView) {
 		self.scrollView = scrollView
@@ -89,6 +103,24 @@ public class BannerController: NSObject {
 		controller.view.removeFromSuperview()
 	}
 	
+	public func addRefreshBegunTrigger(source: NSObject, target: Selector) {
+		refreshBegunTriggers.append(RefreshBeganTrigger(source: source, selector: target))
+	}
+
+	public func removeBeginRefresh(source: NSObject, target: Selector) {
+		guard let index = (refreshBegunTriggers.firstIndex { $0.source == source && $0.selector == target }) else {
+			return
+		}
+		refreshBegunTriggers.remove(at: index)
+	}
+	
+	// Triggers the registered triggers
+	func refreshDidBegin() {
+		for trigger in refreshBegunTriggers {
+			trigger.trigger()
+		}
+	}
+
 	func installRefresherIfNeeded() {
 		guard let controller = refreshController, let scrollView = scrollView else {
 			return
@@ -221,7 +253,7 @@ public class BannerController: NSObject {
     
   }
 
-  public func beginRefreshing(then: Complition? = nil) {
+	public func beginRefreshing() {
 		guard let scrollView = scrollView, let controller = refreshController, !refreshState.isOpen else {
 			return
 		}
@@ -272,7 +304,7 @@ public class BannerController: NSObject {
         self.refreshState = .open
         // reset the bounce
         scrollView.bounces = shouldBounce
-        then?()
+				self.refreshDidBegin()
       }
       animator.start()
 //    }

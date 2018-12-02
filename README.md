@@ -55,3 +55,9 @@ public protocol ExpandableController {
 }
 ````
 This provides feedback to the implementation about the expansion of the view, based on a percentage of the `desiredHeight`.  This provides implementations an opportunity to provide some animation effects or other tasks which might be related to how they want to display/update the control
+
+# Why the awesome name
+
+Yeah, I know, exciting isn't it.  I see a lot of really cool libraries about doing simular things, many times I find myself just wanting to experiement with the idea or make my own "enchancements", which leads to "Just Another ... library"
+
+I did toy with the idea of calling it Hulk or Gamma, after Dr Banner, but thought that might just be a little to obscure for most people

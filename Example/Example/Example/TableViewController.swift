@@ -27,6 +27,7 @@ class TableViewController: UITableViewController {
     
     bannerController.refreshController = AppleRefreshController()
     bannerController.install(on: tableView)
+		bannerController.addRefreshBegunTrigger(source: self, target: #selector(performRefresh))
   }
   
   // MARK: - Table view data source
@@ -46,6 +47,12 @@ class TableViewController: UITableViewController {
   }
   
   @IBAction func beginRefreshing(_ sender: Any) {
-    bannerController.beginRefreshing()
+		bannerController.beginRefreshing()
   }
+	
+	@objc func performRefresh() {
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5), execute: {
+			self.endRefreshing(self)
+		})
+	}
 }
