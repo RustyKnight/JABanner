@@ -181,6 +181,8 @@ public class BannerController: NSObject {
 		// Probably also need to include the contentInsets
 		let yPos = scrollView.safeAreaInsets.top + scrollView.contentOffset.y
 
+		scrollView.bringSubviewToFront(refreshView)
+		
 		if refreshState.isOpen {
 			// The intent is to resize the view if the scrollview is pulled down, but prevent
 			// it from been collapsed, making it "sticky"
