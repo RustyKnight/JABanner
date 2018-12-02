@@ -100,13 +100,10 @@ public class DurationAnimator: Animator {
 	}
 	
 	override func didStop() {
-    print("didStop")
 		if let ticker = ticker {
 			ticker(self, progress)
 		}
     if let completed = completed {
-      //, rawProgress >= 1.0
-      print("call completed")
       completed(rawProgress >= 1.0)
     }
 		delegate?.didComplete(animation: self, completed: rawProgress >= 1.0)
