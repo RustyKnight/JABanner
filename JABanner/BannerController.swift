@@ -54,6 +54,7 @@ public class BannerController: NSObject {
 		case closed
     
     case relaxing
+		case transitioning
 		
 		// Call me lazy ;)
 		var isOpen: Bool {
@@ -193,6 +194,7 @@ public class BannerController: NSObject {
 
 			if height != currentFrame.height {
 				let progress = height / desiredHeight
+//				print("1...")
 				refreshController.expanded(by: progress)
 			}
 			
@@ -217,7 +219,7 @@ public class BannerController: NSObject {
         lastOffset = nil
 
         self.beginRefreshing()
-      } else {
+      } else if refreshState != .transitioning {
         // The scrollview is been pulled down, beyond it's "0" point
         //let yPos = scrollView.safeAreaInsets.top + scrollView.contentOffset.y
         // Calculate the desired height based on the expanded state.
@@ -229,6 +231,7 @@ public class BannerController: NSObject {
 				
 				if height != currentFrame.height {
         	let progress = height / desiredHeight
+//					print("2...")
         	refreshController.expanded(by: progress)
 				}
       }
@@ -256,6 +259,7 @@ public class BannerController: NSObject {
     scrollView.contentInset.top = snapShot.insetTop + value
 
     controller.view.frame = CGRect(x: 0, y: yPos, width: scrollView.bounds.width, height: value)
+//		print("3...")
     controller.expanded(by: delta)
     
   }
@@ -264,6 +268,8 @@ public class BannerController: NSObject {
 		guard let scrollView = scrollView, let controller = refreshController, !refreshState.isOpen else {
 			return
 		}
+		
+		refreshState = .transitioning
     
 		let refreshView = controller.view
 		let desiredHeight = controller.desiredHeight
@@ -322,6 +328,7 @@ public class BannerController: NSObject {
 		guard let scrollView = scrollView, let controller = refreshController, refreshState.isOpen else {
 			return
 		}
+		refreshState = .transitioning
 		let refreshView = controller.view
 		//let desiredHeight = controller.desiredHeight
 

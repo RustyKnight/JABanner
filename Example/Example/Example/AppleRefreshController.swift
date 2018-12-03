@@ -115,6 +115,9 @@ class AppleRefreshController: UIView, RefreshableController {
   }
   
   func expanded(by delta: CGFloat) {
+		
+		print("delta = \(delta)")
+		
     gradientLayer.frame = bounds
     
     let progress = min(1, max(0, delta))
