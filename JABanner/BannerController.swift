@@ -183,14 +183,18 @@ public class BannerController: NSObject {
 
 		scrollView.bringSubviewToFront(refreshView)
 		
+		let currentFrame = refreshView.frame
+		
 		if refreshState.isOpen {
 			// The intent is to resize the view if the scrollview is pulled down, but prevent
 			// it from been collapsed, making it "sticky"
 			let height = max(actualOffset, desiredHeight)
 			refreshView.frame = CGRect(x: 0, y: yPos, width: scrollView.bounds.width, height: height)
 
-			let progress = height / desiredHeight
-			refreshController.expanded(by: progress)
+			if height != currentFrame.height {
+				let progress = height / desiredHeight
+				refreshController.expanded(by: progress)
+			}
 			
 		} else if actualOffset > 0 && !refreshState.isOpen && refreshState != .relaxing {
       // While been dragged, keep track of the last offset height, as this
@@ -222,10 +226,11 @@ public class BannerController: NSObject {
         // If it's not expanded, then we can allow it to shrink...
         let height = refreshState.isOpen ? (actualOffset < desiredHeight ? desiredHeight : actualOffset) : actualOffset
         refreshView.frame = CGRect(x: 0, y: yPos, width: scrollView.bounds.width, height: height)
-        
-        let progress = height / desiredHeight
-        
-        refreshController.expanded(by: progress)
+				
+				if height != currentFrame.height {
+        	let progress = height / desiredHeight
+        	refreshController.expanded(by: progress)
+				}
       }
 		}
 	}
