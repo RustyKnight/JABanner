@@ -62,6 +62,8 @@ class AppleRefreshController: UIView, RefreshableController {
     layer.endPoint = CGPoint(x: 1, y: 0)
     return layer
   }()
+	
+	var isRefreshing: Bool = false
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -90,12 +92,13 @@ class AppleRefreshController: UIView, RefreshableController {
     appleLayer.path = self.applePath
     
     layer.insertSublayer(gradientLayer, at: 0)
-    layer.mask = appleLayer
+    gradientLayer.mask = appleLayer
     
     backgroundColor = UIColor(red: 0.647, green: 0.678, blue: 0.690, alpha: 1.0)
   }
   
   func beginRefreshing() {
+		isRefreshing = true
     let animation = CABasicAnimation(keyPath: "locations")
     animation.fromValue = [-0.5, -0.25, 0, 0.25, 0.5]
     animation.toValue = [0.5, 0.75, 1, 1.25, 1.5]
@@ -105,12 +108,16 @@ class AppleRefreshController: UIView, RefreshableController {
   }
   
   func endRefreshing() {
+		isRefreshing = false
     layer.removeAllAnimations()
     gradientLayer.removeAllAnimations()
     appleLayer.removeAllAnimations()
   }
   
   func expanded(by delta: CGFloat) {
+		
+		print("delta = \(delta)")
+		
     gradientLayer.frame = bounds
     
     let progress = min(1, max(0, delta))
@@ -132,6 +139,10 @@ class AppleRefreshController: UIView, RefreshableController {
     layer.removeAllAnimations()
     gradientLayer.removeAllAnimations()
     appleLayer.removeAllAnimations()
+		
+		if delta == 1.0 && isRefreshing {
+			beginRefreshing()
+		}
   }
 
 }

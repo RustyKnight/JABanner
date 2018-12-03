@@ -15,9 +15,9 @@ While there are some really awesome “examples”, none provided a workable sol
 The library has been designed with re-use in mind, with the intention that a single project may use a number of different refresh controls (or sticky headers) on any number of different views.
 
 With this in mind, the library has been designed:
-* No to use inheritance.  This means the library does not extend `UIScrollView`.  This is intentional for a number of reasons.  This prevents the need to have to provide customised versions of classes like `UITableView` and `UICollectionView`, which could seriously compromise the design of other projects
-* No use of `extension`s.  This is personal choice, but it means that there are no “extra” functions exposed on other `UIScrollView` based classes, which might otherwise complicate development or possibly compromise other classes.  It also means that it becomes a deliberate, conscious decision on the part of the developer to make use of the library, which could make it easier to diagnose issues.
-* No using the `UIScrollViewDelegate`, as this could break the implementing class.  Instead, the API makes use KVO and monitors key properties of the `UIScrollView` in order to perform it's operations
+* Not to use inheritance.  This means the library does not extend `UIScrollView`.  This is intentional for a number of reasons.  This prevents the need to have to provide customised versions of classes like `UITableView` and `UICollectionView`, which could seriously compromise the design of other projects
+* Not to use `extension`s.  This is personal choice, but it means that there are no “extra” functions exposed on other `UIScrollView` based classes, which might otherwise complicate development or possibly compromise other classes.  It also means that it becomes a deliberate, conscious decision on the part of the developer to make use of the library, which could make it easier to diagnose issues.
+* Not using the `UIScrollViewDelegate`, as this could break the implementing class.  Instead, the API makes use KVO and monitors key properties of the `UIScrollView` in order to perform it's operations
 
 ## Usage
 
@@ -55,3 +55,9 @@ public protocol ExpandableController {
 }
 ````
 This provides feedback to the implementation about the expansion of the view, based on a percentage of the `desiredHeight`.  This provides implementations an opportunity to provide some animation effects or other tasks which might be related to how they want to display/update the control
+
+# Why the awesome name
+
+Yeah, I know, exciting isn't it.  I see a lot of really cool libraries about doing simular things, many times I find myself just wanting to experiement with the idea or make my own "enchancements", which leads to "Just Another ... library"
+
+I did toy with the idea of calling it Hulk or Gamma, after Dr Banner, but thought that might just be a little to obscure for most people
