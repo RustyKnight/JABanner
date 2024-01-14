@@ -21,7 +21,7 @@ With this in mind, the library has been designed:
 
 ## Usage
 
-Simple create an strong instance of the `BannerController`, assign a `RefreshableController` to it and install it onto the desired `UIScrollView`
+Simply create an strong instance of the `BannerController`, assign a `RefreshableController` to it and install it onto the desired `UIScrollView`
 
 ````
 let bannerController: BannerController = BannerController()
@@ -45,7 +45,7 @@ This provides a number of imporant properties
 * `view` is the actual view you want to display, this is added to the `UIScrollView`
 * `desiredHeight`. I was aiming to have as much support from autolayout as possible, but I haven't gotten to that yet, so instead the implementation needs to provide the `desriedHeight` hint, which dictates the “expaned” height of the control.  The API won’t call `beginRefreshing` until the user has pulled the `UIScrollView` down past this point
 * `beginRefreshing`. Notifies the implementation that a “refresh” has been “triggered”.  This may occur because the code has called `beginRefresh` on the `BannerController` or because the user pulled the `UIScrollView` down beyond the `desiredHeight` of the view
-* `endRefreshing`. Notifies the implementation has finished the refresh process.  This will collapse the view.  This is triggered by the code calling `endRefreshing` on the `BannerController`
+* `endRefreshing`. Notifies the implementation that a "refresh" has finished.  This will collapse the view.  This is triggered by the code calling `endRefreshing` on the `BannerController`
 
 In additional, the `RefreshableController` also conforms to the `ExpandableController` `protocol`
 
