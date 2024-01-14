@@ -1,8 +1,12 @@
+![Swift](https://img.shields.io/badge/Swift-4.2-orange) ![iOS](https://img.shields.io/badge/iOS-12.1-orange)
+
 #  "Just Another Banner"
 
 ## Purpose
 
 JABanner is intended to be a simple, flexible and re-usable framework for implementing custom refresh controls (and eventually sticky headers) in `UIScrollView`s
+
+![](Snapshot/Snapshot.gif)
 
 ## Why?
 
