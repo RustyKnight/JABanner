@@ -9,30 +9,30 @@
 import Foundation
 
 internal func cgfloat(min: CGFloat, max: CGFloat, at point: Double, reversed: Bool = false) -> CGFloat {
-  let from = reversed ? max : min
-  let to = reversed ? min : max
-  
-  let distant = to - from
-  return (distant * CGFloat(point)) + from
+    let from = reversed ? max : min
+    let to = reversed ? min : max
+    
+    let distant = to - from
+    return (distant * CGFloat(point)) + from
 }
 
 internal func cgfloat(in range: Range<CGFloat>, at point: Double, reversed: Bool = false) -> CGFloat {
-  return cgfloat(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
+    return cgfloat(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
 }
 
 internal func cgfloat(in range: ClosedRange<CGFloat>, at point: Double, reversed: Bool = false) -> CGFloat {
-  return cgfloat(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
+    return cgfloat(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
 }
 
 
 public extension Range where Bound == CGFloat {
-  func value(at point: Double, reversed: Bool = false) -> CGFloat {
-    return cgfloat(in: self, at: point, reversed: reversed)
-  }
+    func value(at point: Double, reversed: Bool = false) -> CGFloat {
+        return cgfloat(in: self, at: point, reversed: reversed)
+    }
 }
 
 public extension ClosedRange where Bound == CGFloat {
-  public func value(at point: Double, reversed: Bool = false) -> CGFloat {
-    return cgfloat(in: self, at: point, reversed: reversed)
-  }
+    func value(at point: Double, reversed: Bool = false) -> CGFloat {
+        return cgfloat(in: self, at: point, reversed: reversed)
+    }
 }

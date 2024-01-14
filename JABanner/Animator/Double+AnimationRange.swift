@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 
 internal func double(min: Double, max: Double, at point: Double, reversed: Bool = false) -> Double {
-	let from = reversed ? max : min
-	let to = reversed ? min : max
-	
-	let distant = to - from
-	return (distant * point) + from
+    let from = reversed ? max : min
+    let to = reversed ? min : max
+    
+    let distant = to - from
+    return (distant * point) + from
 }
 
 internal func double(in range: Range<Double>, at point: Double, reversed: Bool = false) -> Double {
-	return double(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
+    return double(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
 }
 
 internal func double(in range: ClosedRange<Double>, at point: Double, reversed: Bool = false) -> Double {
-	return double(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
+    return double(min: range.lowerBound, max: range.upperBound, at: point, reversed: reversed)
 }
 
 // MARK: Animatable range helpers
@@ -30,13 +30,13 @@ internal func double(in range: ClosedRange<Double>, at point: Double, reversed: 
 // They can be used to calculate the current value between two points based on
 // a given progression point
 public extension Range where Bound == Double {
-	public func value(at point: Double, reversed: Bool = false) -> Double {
-		return double(in: self, at: point, reversed: reversed)
-	}
+    func value(at point: Double, reversed: Bool = false) -> Double {
+        return double(in: self, at: point, reversed: reversed)
+    }
 }
 
 public extension ClosedRange where Bound == Double {
-	public func value(at point: Double, reversed: Bool = false) -> Double {
-		return double(in: self, at: point, reversed: reversed)
-	}
+    func value(at point: Double, reversed: Bool = false) -> Double {
+        return double(in: self, at: point, reversed: reversed)
+    }
 }
