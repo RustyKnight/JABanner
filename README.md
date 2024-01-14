@@ -10,7 +10,7 @@ JABanner is intended to be a simple, flexible and re-usable framework for implem
 
 ## Why?
 
-I spend more than a working week exploring other libraries and blog posts while looking for a simple way to customise a refresh control for a project I was working on.
+I spent more than a working week exploring other libraries and blog posts while looking for a simple way to customise a refresh control for a project I was working on.
 
 While there are some really awesome “examples”, none provided a workable solution which was abstract enough to be usable (or usable in way which I felt comfortable introducing into my projects) and many were simply out-of-date (I didn’t find one which worked well with the iPhone X)
 
